@@ -1,0 +1,37 @@
+﻿@model Models.Flight
+@{
+    ViewBag.Title = "Detalles";
+}
+<h2>Detalles de los vuelos</h2>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Destination)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Destination)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DepartureDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DepartureDate)
+        </dd>
+
+    </dl>
+</div>
+
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id}) |
+    @Html.ActionLink("Volver a Administración de Vuelos", "Index")
+</p>
+
+
+
+

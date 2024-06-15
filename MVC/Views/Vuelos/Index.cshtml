@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Models.Flight>
+
+@{
+    ViewBag.Title = "Vuelos";
+}
+
+@Html.ActionLink("Buscar Vuelo por Destino", "BuscarDestino", "Vuelos")
+@Html.ActionLink("Buscar Vuelo por Fecha", "BuscarFecha", "Vuelos")
+
+<h2>Lista de Vuelos</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Destination)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            Departure Date
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Destination)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartureDate)
+            </td>
+        </tr>
+
+    }
+</table>
+
