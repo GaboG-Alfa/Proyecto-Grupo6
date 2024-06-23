@@ -11,15 +11,16 @@ namespace Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
-    public partial class Flight
+    
+    public partial class DetallesOrdenes
     {
-        public int Id { get; set; }
-        public string Destination { get; set; }
-        public int Price { get; set; }
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public System.DateTime DepartureDate { get; set; }
+        public int DetalleID { get; set; }
+        public Nullable<int> OrdenID { get; set; }
+        public Nullable<int> ProductoID { get; set; }
+        public int Cantidad { get; set; }
+        public decimal Precio { get; set; }
+    
+        public virtual Ordenes Ordenes { get; set; }
+        public virtual Productos Productos { get; set; }
     }
 }

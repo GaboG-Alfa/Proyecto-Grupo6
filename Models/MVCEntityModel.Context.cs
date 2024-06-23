@@ -13,10 +13,10 @@ namespace Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Laboratorio2Entities : DbContext
+    public partial class ProyectoEntities : DbContext
     {
-        public Laboratorio2Entities()
-            : base("name=Laboratorio2Entities")
+        public ProyectoEntities()
+            : base("name=ProyectoEntities")
         {
         }
     
@@ -25,7 +25,15 @@ namespace Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Account> Account { get; set; }
-        public virtual DbSet<Flight> Flight { get; set; }
+        public virtual DbSet<CarritoCompras> CarritoCompras { get; set; }
+        public virtual DbSet<Categorias> Categorias { get; set; }
+        public virtual DbSet<DetallesOrdenes> DetallesOrdenes { get; set; }
+        public virtual DbSet<Direcciones> Direcciones { get; set; }
+        public virtual DbSet<Ordenes> Ordenes { get; set; }
+        public virtual DbSet<Pagos> Pagos { get; set; }
+        public virtual DbSet<Productos> Productos { get; set; }
+        public virtual DbSet<Roles> Roles { get; set; }
+        public virtual DbSet<Usuarios> Usuarios { get; set; }
+        public virtual DbSet<Ventas> Ventas { get; set; }
     }
 }
