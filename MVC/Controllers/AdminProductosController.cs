@@ -10,66 +10,66 @@ using System.Web.Mvc;
 namespace MVC.Controllers
 {
     [Authorize]
-    public class AdminVuelosController : Controller
+    public class AdminProductosController : Controller
     {
         private ProyectoEntities db = new ProyectoEntities();
-        // GET: Vuelos
+        // GET: Productos
         public ActionResult Index()
         {
-            List<Flight> flights = db.Flight.ToList();
-            return View(flights);
+            List<Productos> productos = db.Productos.ToList();
+            return View(productos);
         }
 
-        // GET: Vuelos/Create
+        // GET: Productos/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Vuelos/Create
+        // POST: Productos/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Destination,Price,DepartureDate")] Flight flights)
+        public ActionResult Create([Bind(Include = "Codigo,Nombre,Descripcion,Cantidad,Precio,CategoriaID,ImagenURL")] Productos productos)
         {
             if (ModelState.IsValid)
             {
-                db.Flight.Add(flights);
+                db.Productos.Add(productos);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(flights);
+            return View(productos);
         }
 
-        // GET: Vuelos/Edit/5
+        // GET: Productos/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Flight fligths = db.Flight.Find(id);
-            if (fligths == null)
+            Productos productos = db.Productos.Find(id);
+            if (productos == null)
             {
                 return HttpNotFound();
             }
-            return View(fligths);
+            return View(productos);
         }
 
-        // POST: Vuelos/Edit/5
+        // POST: Productos/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Destination,Price,DepartureDate")] Flight flights)
+        public ActionResult Edit([Bind(Include = "ProductoID,Codigo,Nombre,Descripcion,Cantidad,Precio,CategoriaID,ImagenURL")] Productos productos)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(flights).State = EntityState.Modified;
+                db.Entry(productos).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(flights);
+            return View(productos);
         }
 
-        // GET: Vuelos/Details/5
+        // GET: Productos/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -77,39 +77,38 @@ namespace MVC.Controllers
 
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Flight flights = db.Flight.Find(id);
-            if (flights == null)
+            Productos productos = db.Productos.Find(id);
+            if (productos == null)
             {
                 return HttpNotFound();
             }
-            return View(flights);
+            return View(productos);
         }
 
-        // GET: Vuelos/Delete/5
+        // GET: Productos/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Flight flights = db.Flight.Find(id);
-            if (flights == null)
+            Productos productos = db.Productos.Find(id);
+            if (productos == null)
             {
                 return HttpNotFound();
             }
-            return View(flights);
+            return View(productos);
         }
 
-        // POST: Vuelos/Delete/5
+        // POST: Productos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Flight flights = db.Flight.Find(id);
-            db.Flight.Remove(flights);
+            Productos productos = db.Productos.Find(id);
+            db.Productos.Remove(productos);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
     }
 }

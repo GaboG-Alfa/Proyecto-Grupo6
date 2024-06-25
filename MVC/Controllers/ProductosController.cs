@@ -11,14 +11,14 @@ using System.Web.Security;
 
 namespace MVC.Controllers
 {
-    public class VuelosController : Controller
+    public class ProductosController : Controller
     {
         private ProyectoEntities db = new ProyectoEntities();
-        // GET: Vuelos
+        // GET: Productos
         public ActionResult Index()
         {
-            List<Flight> flights = db.Flight.ToList();
-            return View(flights);
+            List<Productos> productos = db.Productos.ToList();
+            return View(productos);
         }
         [HttpGet]
         public ActionResult BuscarFecha()
@@ -29,28 +29,28 @@ namespace MVC.Controllers
         [HttpPost]
         public ActionResult BuscarFecha(string fecha1, string fecha2)
         {
-            List<Flight> flightsList = new List<Flight>();
-            List<Flight> flightsList2 = db.Flight.ToList();
-            List<Flight> flightListError = new List<Flight>();
+            List<Productos> productosList = new List<Productos>();
+            List<Productos> productosList2 = db.Productos.ToList();
+            List<Productos> productosListError = new List<Productos>();
 
             try
             {
                 DateTime fechaInicio = DateTime.Parse(fecha1);
                 DateTime fechaFin = DateTime.Parse(fecha2);
 
-                foreach (var flight in flightsList2)
+                foreach (var productos in flightsList2)
                 {
-                    if (flight.DepartureDate >= fechaInicio && flight.DepartureDate <= fechaFin)
+                    if (productos.DepartureDate >= fechaInicio && productos.DepartureDate <= fechaFin)
                     {
-                        flightsList.Add(flight);
+                        productosList.Add(productos);
                     }
                 }
 
-                return View("Index", flightsList);
+                return View("Index", productosList);
             } catch (Exception error) {
 
                 Console.WriteLine(error.Message);
-               return View(flightListError);
+               return View(productosListError);
             }
         }
 
@@ -63,18 +63,18 @@ namespace MVC.Controllers
         [HttpPost]
         public ActionResult BuscarDestino(string destino)
         {
-            List<Flight> flightsList = new List<Flight>();
-            List<Flight> flightsList2 = db.Flight.ToList();
+            List<Productos> productosList = new List<Productos>();
+            List<Productos> productosList2 = db.Productos.ToList();
 
-            foreach (var flight in flightsList2)
+            foreach (var productos in productosList2)
             {
-                if (flight.Destination == destino)
+                if (productos.Destination == destino)
                 {
-                    flightsList.Add(flight);
+                    productosList.Add(productos);
                 }
             }
-            TempData["FlightsList"] = flightsList;
-            return View("Index",flightsList);
+            TempData["ProductosList"] = productosList;
+            return View("Index",productosList);
         }
 
 

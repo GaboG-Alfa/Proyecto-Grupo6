@@ -11,9 +11,9 @@ using System.Web.Security;
 
 namespace MVC.Controllers
 {
-    public class AccountController : Controller
+    public class UsuariosController : Controller
     {
-        private AccountBL accountBL = new AccountBL();
+        private AdminBL adminBL = new AdminBL();
 
         // GET: Usuarios
         public ActionResult Index()
@@ -21,19 +21,19 @@ namespace MVC.Controllers
             return View();
         }
 
-        // POST: Account/Index
+        // POST: Usuarios/Index
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index([Bind(Include = "Email,AccountPassword")] Account
-        account)
+        public ActionResult Index([Bind(Include = "Nombre,Apellido,Email,Contrasena,RolID")] Usuarios
+        usuarios)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    accountBL.logIn(account);
-                    FormsAuthentication.SetAuthCookie(account.Email, true);
-                    return RedirectToAction("Index", "AdminVuelos");
+                    adminBL.logIn(usuarios);
+                    FormsAuthentication.SetAuthCookie(usuarios.Email, true);
+                    return RedirectToAction("Index", "AdminProductos");
                 }
                 catch (Exception error)
                 {
@@ -44,7 +44,7 @@ namespace MVC.Controllers
             return View(account);
         }
 
-        // GET: Account/LogOut
+        // GET: Usuarios/LogOut
         public ActionResult LogOut()
         {
             FormsAuthentication.SignOut();
