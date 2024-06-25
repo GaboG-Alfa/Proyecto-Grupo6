@@ -11,7 +11,7 @@ namespace BL
     public class AdminBL
     {
         private AdminDA adminDA = new AdminDA();
-        public bool logIn(Admin admin)
+        public bool logIn(Usuarios admin)
         {
             bool adminExits = adminDA.logIn(admin);
             if (!adminExits)
