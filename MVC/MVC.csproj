@@ -183,8 +183,8 @@
     <Content Include="Views\AdminProductos\Delete.cshtml" />
     <Content Include="Views\AdminProductos\Details.cshtml" />
     <Content Include="Views\Usuarios\Index.cshtml" />
-    <Content Include="Views\Productos\BuscarDestino.cshtml" />
-    <Content Include="Views\Productos\BuscarFecha.cshtml" />
+    <Content Include="Views\Productos\BuscarCodigo.cshtml" />
+    <Content Include="Views\Productos\BuscarNombre.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

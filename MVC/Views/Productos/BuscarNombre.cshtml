@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Buscar Nombre";
+}
+<style>
+    .form-group {
+        margin: 1rem 0;
+    }
+</style>
+@using (Html.BeginForm("BuscarNombre", "Productos", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <label for="destino">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Buscar</button>
+
+}
+
+<div>
+    @Html.ActionLink("Regresar a la Lista", "Index", "Productos")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
