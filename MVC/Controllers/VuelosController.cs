@@ -13,7 +13,7 @@ namespace MVC.Controllers
 {
     public class VuelosController : Controller
     {
-        private Laboratorio2Entities db = new Laboratorio2Entities();
+        private ProyectoEntities db = new ProyectoEntities();
         // GET: Vuelos
         public ActionResult Index()
         {

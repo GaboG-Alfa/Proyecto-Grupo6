@@ -176,15 +176,15 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Vuelos\Index.cshtml" />
-    <Content Include="Views\AdminVuelos\Create.cshtml" />
-    <Content Include="Views\AdminVuelos\Edit.cshtml" />
-    <Content Include="Views\AdminVuelos\Index.cshtml" />
-    <Content Include="Views\AdminVuelos\Delete.cshtml" />
-    <Content Include="Views\AdminVuelos\Details.cshtml" />
+    <Content Include="Views\Productos\Index.cshtml" />
+    <Content Include="Views\AdminProductos\Create.cshtml" />
+    <Content Include="Views\AdminProductos\Edit.cshtml" />
+    <Content Include="Views\AdminProductos\Index.cshtml" />
+    <Content Include="Views\AdminProductos\Delete.cshtml" />
+    <Content Include="Views\AdminProductos\Details.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
-    <Content Include="Views\Vuelos\BuscarDestino.cshtml" />
-    <Content Include="Views\Vuelos\BuscarFecha.cshtml" />
+    <Content Include="Views\Productos\BuscarDestino.cshtml" />
+    <Content Include="Views\Productos\BuscarFecha.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
