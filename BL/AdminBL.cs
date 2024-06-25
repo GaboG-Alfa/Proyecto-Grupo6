@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace BL
 {
-    public class AccountBL
+    public class AdminBL
     {
-        private UserDA accountDA = new UserDA();
-        public bool logIn(Account account)
+        private AdminDA adminDA = new AdminDA();
+        public bool logIn(Admin admin)
         {
-            bool accountExits = accountDA.logIn(account);
-            if (!accountExits)
+            bool adminExits = adminDA.logIn(admin);
+            if (!adminExits)
             {
                 throw new Exception("Incorrect credentials");
             }
-            return accountExits;
+            return adminExits;
         }
     }
 }
