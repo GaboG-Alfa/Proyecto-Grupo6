@@ -10,7 +10,7 @@ namespace BL
 {
     public class AccountBL
     {
-        private AccountDA accountDA = new AccountDA();
+        private UserDA accountDA = new UserDA();
         public bool logIn(Account account)
         {
             bool accountExits = accountDA.logIn(account);

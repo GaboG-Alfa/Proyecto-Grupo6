@@ -1,42 +1,60 @@
-﻿@model IEnumerable<Models.Flight>
+﻿@model IEnumerable<Models.Productos>
 
 @{
-    ViewBag.Title = "Vuelos";
+    ViewBag.Title = "Productos";
 }
 
-@Html.ActionLink("Buscar Vuelo por Destino", "BuscarDestino", "Vuelos")
-@Html.ActionLink("Buscar Vuelo por Fecha", "BuscarFecha", "Vuelos")
+@Html.ActionLink("Buscar Vuelo por Destino", "BuscarDestino", "Productos")
+@Html.ActionLink("Buscar Vuelo por Fecha", "BuscarFecha", "Productos")
 
-<h2>Lista de Vuelos</h2>
+<h2>Lista de Productos</h2>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Id)
+            @Html.DisplayNameFor(model => model.ProductoID)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Destination)
+            @Html.DisplayNameFor(model => model.Codigo)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.DisplayNameFor(model => model.Nombre)
         </th>
         <th>
-            Departure Date
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cantidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Precio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CategoriaID)
         </th>
     </tr>
     @foreach (var item in Model)
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Id)
+                @Html.DisplayFor(modelItem => item.ProductoID)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Destination)
+                @Html.DisplayFor(modelItem => item.Codigo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                @Html.DisplayFor(modelItem => item.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DepartureDate)
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cantidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoriaID)
             </td>
         </tr>
 

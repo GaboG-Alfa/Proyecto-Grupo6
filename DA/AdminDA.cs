@@ -1,4 +1,4 @@
-
+﻿
 using Models;
 using System;
 using System.Collections.Generic;
@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace DA
 {
-    public class AccountDA
+    public class AdminDA
     {
 
-        public bool logIn(Account account)
+        public bool logIn(Usuarios usuario)
         {
             try
             {
-                using (Laboratorio2Entities context = new Laboratorio2Entities())
+                using (ProyectoEntities context = new ProyectoEntities())
                 {
-                    return context.Account.FirstOrDefault(x => x.Email == account.Email &&
-                    x.AccountPassword == account.AccountPassword && x.AccountRole == "admin") != null;
+                    return context.Usuarios.FirstOrDefault(x => x.Email == usuario.Email &&
+                    x.Contrasena == usuario.Contrasena && x.RolID== 1) != null;
                 }
 
             }
