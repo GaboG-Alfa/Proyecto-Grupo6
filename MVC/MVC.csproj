@@ -182,7 +182,7 @@
     <Content Include="Views\AdminProductos\Index.cshtml" />
     <Content Include="Views\AdminProductos\Delete.cshtml" />
     <Content Include="Views\AdminProductos\Details.cshtml" />
-    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Usuarios\Index.cshtml" />
     <Content Include="Views\Productos\BuscarDestino.cshtml" />
     <Content Include="Views\Productos\BuscarFecha.cshtml" />
   </ItemGroup>
