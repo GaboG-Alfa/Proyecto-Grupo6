@@ -38,10 +38,10 @@ namespace MVC.Controllers
                 catch (Exception error)
                 {
                     ViewBag.Message = error.Message;
-                    return View(account);
+                    return View(usuarios);
                 }
             }
-            return View(account);
+            return View(usuarios);
         }
 
         // GET: Usuarios/LogOut
