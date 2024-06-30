@@ -21,63 +21,50 @@ namespace MVC.Controllers
             return View(productos);
         }
         [HttpGet]
-        public ActionResult BuscarFecha()
+        public ActionResult BuscarNombre()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult BuscarFecha(string fecha1, string fecha2)
-        {
-            List<Productos> productosList = new List<Productos>();
-            List<Productos> productosList2 = db.Productos.ToList();
-            List<Productos> productosListError = new List<Productos>();
-
-            try
-            {
-                DateTime fechaInicio = DateTime.Parse(fecha1);
-                DateTime fechaFin = DateTime.Parse(fecha2);
-
-                foreach (var productos in flightsList2)
-                {
-                    if (productos.DepartureDate >= fechaInicio && productos.DepartureDate <= fechaFin)
-                    {
-                        productosList.Add(productos);
-                    }
-                }
-
-                return View("Index", productosList);
-            } catch (Exception error) {
-
-                Console.WriteLine(error.Message);
-               return View(productosListError);
-            }
-        }
-
-        [HttpGet]
-        public ActionResult BuscarDestino()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult BuscarDestino(string destino)
+        public ActionResult BuscarNombre(string nombre)
         {
             List<Productos> productosList = new List<Productos>();
             List<Productos> productosList2 = db.Productos.ToList();
 
             foreach (var productos in productosList2)
             {
-                if (productos.Destination == destino)
+                if (productos.Nombre == nombre)
                 {
                     productosList.Add(productos);
                 }
             }
             TempData["ProductosList"] = productosList;
-            return View("Index",productosList);
+            return View("Index", productosList);
         }
 
+        [HttpGet]
+        public ActionResult BuscarCodigo()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        public ActionResult BuscarCodigo(string codigo)
+        {
+            List<Productos> productosList = new List<Productos>();
+            List<Productos> productosList2 = db.Productos.ToList();
+
+            foreach (var productos in productosList2)
+            {
+                if (productos.Codigo == codigo)
+                {
+                    productosList.Add(productos);
+                }
+            }
+            TempData["ProductosList"] = productosList;
+            return View("Index", productosList);
+        }
 
 
     }

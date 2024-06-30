@@ -1,13 +1,17 @@
 ﻿@model IEnumerable<Models.Productos>
 
 @{
-    ViewBag.Title = "Productos";
+    ViewBag.Title = "Catálogo de Productos";
 }
 
-@Html.ActionLink("Buscar Producto por Codigo", "BuscarCodigo", "Productos")
-@Html.ActionLink("Buscar Producto por Nombre", "BuscarNombre", "Productos")
+<h2>Catálogo de Productos</h2>
 
-<h2>Lista de Productos</h2>
+<p>
+    @Html.ActionLink("Buscar por Categoría", "BuscarCategoria", "ClienteProductos")
+    @Html.ActionLink("Buscar Producto por Nombre", "BuscarNombre", "ClienteProductos")
+
+</p>
+
 <table class="table">
     <tr>
         <th>
