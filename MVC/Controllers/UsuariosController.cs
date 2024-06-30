@@ -48,7 +48,7 @@ namespace MVC.Controllers
         public ActionResult LogOut()
         {
             FormsAuthentication.SignOut();
-            return RedirectToAction("Index","Productos");
+            return RedirectToAction("Index","ClienteProductos");
         }
 
     }

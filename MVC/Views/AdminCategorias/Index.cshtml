@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Models.Categorias>
+@{
+    ViewBag.Title = "Administración de Categorías";
+}
+
+<h2>Lista de Administración de Categorías</h2>
+@Html.ActionLink("Agregar Categoría", "Create", "AdminCategorias")
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CategoriaID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Productos)
+        </th>
+        <th>
+            Acciones
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoriaID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @foreach (var producto in item.Productos)
+                {
+                    <div>@producto.Nombre</div>
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "EditCategory", new { id = item.CategoriaID }) |
+                @Html.ActionLink("Detalles", "DetailsCategory", new { id = item.CategoriaID }) |
+                @Html.ActionLink("Eliminar", "DeleteCategory", new { id = item.CategoriaID })
+            </td>
+        </tr>
+    }
+</table>

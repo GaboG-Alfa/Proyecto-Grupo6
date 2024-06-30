@@ -1,10 +1,17 @@
 ﻿@model IEnumerable<Models.Productos>
+
 @{
-    ViewBag.Title = "Administración de Productos";
+    ViewBag.Title = "Catálogo de Productos";
 }
 
-<h2>Lista de Administración de Productos </h2>
-@Html.ActionLink("Agregar Producto", "Create")
+<h2>Catálogo de Productos</h2>
+
+<p>
+    @Html.ActionLink("Buscar por Categoría", "BuscarCategoria", "ClienteProductos")
+    @Html.ActionLink("Buscar Producto por Nombre", "BuscarNombre", "ClienteProductos")
+
+</p>
+
 <table class="table">
     <tr>
         <th>
@@ -54,12 +61,6 @@
                 @Html.DisplayFor(modelItem => item.CategoriaID)
             </td>
         </tr>
-
-        <td>
-            @Html.ActionLink("Editar", "Edit", new { id = item.ProductoID }) |
-            @Html.ActionLink("Detalles", "Details", new { id = item.ProductoID }) |
-            @Html.ActionLink("Eliminar", "Delete", new { id = item.ProductoID })
-        </td>
 
     }
 </table>

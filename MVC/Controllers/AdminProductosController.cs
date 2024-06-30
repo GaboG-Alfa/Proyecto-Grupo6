@@ -29,7 +29,7 @@ namespace MVC.Controllers
         // POST: Productos/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Codigo,Nombre,Descripcion,Cantidad,Precio,CategoriaID,ImagenURL")] Productos productos)
+        public ActionResult Create([Bind(Include = "Codigo,Nombre,Descripcion,Cantidad,Precio,CategoriaID")] Productos productos)
         {
             if (ModelState.IsValid)
             {
@@ -58,7 +58,7 @@ namespace MVC.Controllers
         // POST: Productos/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductoID,Codigo,Nombre,Descripcion,Cantidad,Precio,CategoriaID,ImagenURL")] Productos productos)
+        public ActionResult Edit([Bind(Include = "ProductoID,Codigo,Nombre,Descripcion,Cantidad,Precio,CategoriaID")] Productos productos)
         {
             if (ModelState.IsValid)
             {
@@ -110,5 +110,20 @@ namespace MVC.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+
+        // Reporte de ventas
+        public ActionResult SalesReport()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult SalesReport(DateTime startDate, DateTime endDate)
+        {
+            var orders = db.Ordenes.Where(o => o.FechaOrden >= startDate && o.FechaOrden <= endDate).ToList();
+            return View(orders);
+        }
     }
 }
+    
