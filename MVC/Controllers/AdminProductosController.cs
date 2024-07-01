@@ -9,10 +9,10 @@ using System.Web.Mvc;
 
 namespace MVC.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class AdminProductosController : Controller
     {
-        private ProyectoEntities db = new ProyectoEntities();
+        private ProyectoEntity db = new ProyectoEntity();
         // GET: Productos
         public ActionResult Index()
         {
@@ -40,7 +40,7 @@ namespace MVC.Controllers
             return View(productos);
         }
 
-        // GET: Productos/Edit/5
+        // GET: Productos/Edit
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -55,7 +55,7 @@ namespace MVC.Controllers
             return View(productos);
         }
 
-        // POST: Productos/Edit/5
+        // POST: Productos/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ProductoID,Codigo,Nombre,Descripcion,Cantidad,Precio,CategoriaID")] Productos productos)
@@ -69,7 +69,7 @@ namespace MVC.Controllers
             return View(productos);
         }
 
-        // GET: Productos/Details/5
+        // GET: Productos/Details
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -85,7 +85,7 @@ namespace MVC.Controllers
             return View(productos);
         }
 
-        // GET: Productos/Delete/5
+        // GET: Productos/Delete
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -100,7 +100,7 @@ namespace MVC.Controllers
             return View(productos);
         }
 
-        // POST: Productos/Delete/5
+        // POST: Productos/Delete
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -126,4 +126,3 @@ namespace MVC.Controllers
         }
     }
 }
-    

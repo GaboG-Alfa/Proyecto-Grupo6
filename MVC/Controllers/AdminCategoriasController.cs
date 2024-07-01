@@ -9,7 +9,7 @@ namespace MVC.Controllers
 {
     public class AdminCategoriasController : Controller
     {
-        private ProyectoEntities db = new ProyectoEntities();
+        private ProyectoEntity db = new ProyectoEntity();
 
         // GET: Categorias
         public ActionResult Index()
@@ -31,13 +31,13 @@ namespace MVC.Controllers
             {
                 db.Categorias.Add(category);
                 db.SaveChanges();
-                return RedirectToAction("Categorias");
+                return RedirectToAction("Index");
             }
 
             return View(category);
         }
 
-        // GET: Categorias/Edit/5
+        // GET: Categorias/Edit
         public ActionResult Edit(int id)
         {
             var category = db.Categorias.Find(id);
@@ -48,7 +48,7 @@ namespace MVC.Controllers
             return View(category);
         }
 
-        // POST: Categorias/Edit/5
+        // POST: Categorias/Edit
         [HttpPost]
         public ActionResult Edit(Categorias category)
         {
@@ -56,12 +56,12 @@ namespace MVC.Controllers
             {
                 db.Entry(category).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Categorias");
+                return RedirectToAction("Index");
             }
             return View(category);
         }
 
-        // GET: Categorias/Details/5
+        // GET: Categorias/Details
         public ActionResult Details(int id)
         {
             var category = db.Categorias.Find(id);
@@ -72,7 +72,7 @@ namespace MVC.Controllers
             return View(category);
         }
 
-        // GET: Categorias/Delete/5
+        // GET: Categorias/Delete
         public ActionResult Delete(int id)
         {
             var category = db.Categorias.Find(id);
@@ -83,14 +83,14 @@ namespace MVC.Controllers
             return View(category);
         }
 
-        // POST: Categorias/Delete/5
+        // POST: Categorias/Delete
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
             var category = db.Categorias.Find(id);
             db.Categorias.Remove(category);
             db.SaveChanges();
-            return RedirectToAction("Categorias");
+            return RedirectToAction("Index");
         }
     }
 }

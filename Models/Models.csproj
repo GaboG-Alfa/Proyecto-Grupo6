@@ -60,77 +60,77 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CarritoCompras.cs">
-      <DependentUpon>MVCEntityModel.tt</DependentUpon>
+      <DependentUpon>ProyectoEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Categorias.cs">
-      <DependentUpon>MVCEntityModel.tt</DependentUpon>
+      <DependentUpon>ProyectoEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Class1.cs" />
     <Compile Include="DetallesOrdenes.cs">
-      <DependentUpon>MVCEntityModel.tt</DependentUpon>
+      <DependentUpon>ProyectoEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Direcciones.cs">
-      <DependentUpon>MVCEntityModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MVCEntityModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MVCEntityModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MVCEntityModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MVCEntityModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MVCEntityModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MVCEntityModel.edmx</DependentUpon>
+      <DependentUpon>ProyectoEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Ordenes.cs">
-      <DependentUpon>MVCEntityModel.tt</DependentUpon>
+      <DependentUpon>ProyectoEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Pagos.cs">
-      <DependentUpon>MVCEntityModel.tt</DependentUpon>
+      <DependentUpon>ProyectoEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Productos.cs">
-      <DependentUpon>MVCEntityModel.tt</DependentUpon>
+      <DependentUpon>ProyectoEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProyectoEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProyectoEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProyectoEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProyectoEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProyectoEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProyectoEntities.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Roles.cs">
-      <DependentUpon>MVCEntityModel.tt</DependentUpon>
+      <DependentUpon>ProyectoEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Usuarios.cs">
-      <DependentUpon>MVCEntityModel.tt</DependentUpon>
+      <DependentUpon>ProyectoEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Ventas.cs">
-      <DependentUpon>MVCEntityModel.tt</DependentUpon>
+      <DependentUpon>ProyectoEntities.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="MVCEntityModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>MVCEntityModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="MVCEntityModel.edmx.diagram">
-      <DependentUpon>MVCEntityModel.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
+    <EntityDeploy Include="ProyectoEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ProyectoEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ProyectoEntities.edmx.diagram">
+      <DependentUpon>ProyectoEntities.edmx</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="MVCEntityModel.Context.tt">
+    <Content Include="ProyectoEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MVCEntityModel.edmx</DependentUpon>
-      <LastGenOutput>MVCEntityModel.Context.cs</LastGenOutput>
+      <DependentUpon>ProyectoEntities.edmx</DependentUpon>
+      <LastGenOutput>ProyectoEntities.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="MVCEntityModel.tt">
+    <Content Include="ProyectoEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MVCEntityModel.edmx</DependentUpon>
-      <LastGenOutput>MVCEntityModel.cs</LastGenOutput>
+      <DependentUpon>ProyectoEntities.edmx</DependentUpon>
+      <LastGenOutput>ProyectoEntities.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

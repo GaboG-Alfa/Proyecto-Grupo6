@@ -15,7 +15,7 @@ namespace DA
         {
             try
             {
-                using (ProyectoEntities context = new ProyectoEntities())
+                using (ProyectoEntity context = new ProyectoEntity())
                 {
                     return context.Usuarios.FirstOrDefault(x => x.Email == usuario.Email &&
                     x.Contrasena == usuario.Contrasena && x.RolID== 1) != null;

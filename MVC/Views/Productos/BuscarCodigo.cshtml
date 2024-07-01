@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Buscar Codigo";
+    ViewBag.Title = "Buscar por Código";
 }
 <style>
     .form-group {
@@ -11,11 +11,12 @@
     @Html.AntiForgeryToken()
 
     <div class="form-group">
-        <label for="destino">Código:</label>
+        <label for="codigo">Código:</label>
         <input type="text" id="codigo" name="codigo" class="form-control" />
     </div>
 
     <button type="submit" class="btn btn-primary">Buscar</button>
+
 }
 
 <div>

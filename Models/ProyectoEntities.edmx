@@ -75,6 +75,8 @@
           <Property Name="Cantidad" Type="int" Nullable="false" />
           <Property Name="Precio" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="CategoriaID" Type="int" />
+          <Property Name="Popularidad" Type="int" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
           <Property Name="ImagenURL" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="Roles">
@@ -397,6 +399,8 @@
           <Property Name="Cantidad" Type="Int32" Nullable="false" />
           <Property Name="Precio" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="CategoriaID" Type="Int32" />
+          <Property Name="Popularidad" Type="Int32" Nullable="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ImagenURL" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CarritoCompras" Relationship="Self.FK_CarritoCompras_Productos" FromRole="Productos" ToRole="CarritoCompras" />
           <NavigationProperty Name="Categorias" Relationship="Self.FK_Productos_Categorias" FromRole="Productos" ToRole="Categorias" />
@@ -582,7 +586,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="ProyectoEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ProyectoEntity" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CarritoCompras" EntityType="Self.CarritoCompras" />
           <EntitySet Name="Categorias" EntityType="Self.Categorias" />
           <EntitySet Name="DetallesOrdenes" EntityType="Self.DetallesOrdenes" />
@@ -647,7 +651,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ProyectoModelStoreContainer" CdmEntityContainer="ProyectoEntities">
+        <EntityContainerMapping StorageEntityContainer="ProyectoModelStoreContainer" CdmEntityContainer="ProyectoEntity">
           <EntitySetMapping Name="CarritoCompras">
             <EntityTypeMapping TypeName="ProyectoModel.CarritoCompras">
               <MappingFragment StoreEntitySet="CarritoCompras">
@@ -723,6 +727,8 @@
                 <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
                 <ScalarProperty Name="Precio" ColumnName="Precio" />
                 <ScalarProperty Name="CategoriaID" ColumnName="CategoriaID" />
+                <ScalarProperty Name="Popularidad" ColumnName="Popularidad" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
                 <ScalarProperty Name="ImagenURL" ColumnName="ImagenURL" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -4,17 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="63eeb62c08334dac9ec134d5c93b76e9" Name="Diagram1">
-        <EntityTypeShape EntityType="ProyectoModel.CarritoCompras" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoModel.Categorias" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoModel.DetallesOrdenes" Width="1.5" PointX="9.75" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoModel.Direcciones" Width="1.5" PointX="5.25" PointY="8.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoModel.Ordenes" Width="1.5" PointX="7.5" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoModel.Pagos" Width="1.5" PointX="9.75" PointY="10.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoModel.Productos" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoModel.Roles" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoModel.Usuarios" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ProyectoModel.Ventas" Width="1.5" PointX="9.75" PointY="3.5" IsExpanded="true" />
+      <Diagram DiagramId="e4878037c51c4a35af98c88a35d55062" Name="Diagram1">
+        <EntityTypeShape EntityType="ProyectoModel.CarritoCompras" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.Categorias" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.DetallesOrdenes" Width="1.5" PointX="9.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.Direcciones" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.Ordenes" Width="1.5" PointX="7.5" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.Pagos" Width="1.5" PointX="9.75" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.Productos" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.Roles" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.Usuarios" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.Ventas" Width="1.5" PointX="9.75" PointY="4" IsExpanded="true" />
         <AssociationConnector Association="ProyectoModel.FK_CarritoCompras_Productos" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoModel.FK_CarritoCompras_Usuarios" ManuallyRouted="false" />
         <AssociationConnector Association="ProyectoModel.FK_Productos_Categorias" ManuallyRouted="false" />

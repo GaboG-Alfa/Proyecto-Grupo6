@@ -7,61 +7,75 @@
 <h2>Catálogo de Productos</h2>
 
 <p>
-    @Html.ActionLink("Buscar por Categoría", "BuscarCategoria", "ClienteProductos")
-    @Html.ActionLink("Buscar Producto por Nombre", "BuscarNombre", "ClienteProductos")
-
+    @Html.ActionLink("Buscar por Categoría", "BuscarCategoria", "ClienteProductos") |
+    @Html.ActionLink("Buscar Producto por Nombre", "BuscarNombre", "ClienteProductos") |
+    @Html.ActionLink("Buscar por Características", "BuscarCaracteristicas", "ClienteProductos")
 </p>
 
+<div>
+    @Html.ActionLink("Precio de Menor a Mayor", "Index", new { sortOrder = "price_asc" }) |
+    @Html.ActionLink("Precio de Mayor a Menor", "Index", new { sortOrder = "price_desc" }) |
+    @Html.ActionLink("Más Reciente", "Index", new { sortOrder = "newest" }) |
+    @Html.ActionLink("Más Popular", "Index", new { sortOrder = "popular" })
+</div>
+
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductoID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Codigo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cantidad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Precio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CategoriaID)
-        </th>
-    </tr>
-    @foreach (var item in Model)
-    {
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductoID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Codigo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descripcion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cantidad)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Precio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CategoriaID)
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductoID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Codigo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cantidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoriaID)
+            </th>
+            <th></th>
         </tr>
-
-    }
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductoID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Codigo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cantidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Precio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoriaID)
+                </td>
+                <td>
+                    @Html.ActionLink("Detalles", "ProductDetails", new { id = item.ProductoID }) |
+                    @Html.ActionLink("Agregar al Carrito", "AddToCart", new { id = item.ProductoID })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
-
