@@ -1,19 +1,15 @@
-﻿using BL;
-using Models;
+﻿using Models;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
 
-namespace MVC.Controllers
+namespace Controllers
 {
     public class ProductosController : Controller
     {
-        private ProyectoEntities db = new ProyectoEntities();
+        private ProyectoEntity db = new ProyectoEntity();
         // GET: Productos
         public ActionResult Index()
         {
@@ -65,7 +61,5 @@ namespace MVC.Controllers
             TempData["ProductosList"] = productosList;
             return View("Index", productosList);
         }
-
-
     }
 }

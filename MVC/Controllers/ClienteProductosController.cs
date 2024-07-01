@@ -1,26 +1,77 @@
-﻿using Microsoft.AspNet.Identity;
-using Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
+using BL;
+using Models;
+using Microsoft.AspNet.Identity;
+using System;
+using DA;
 
 namespace MVC.Controllers
 {
     public class ClienteProductosController : Controller
     {
-        private ProyectoEntities db = new ProyectoEntities();
+        private ClienteBL clientBL;
+
+        public ClienteProductosController()
+        {
+            var dbContext = new ProyectoEntity();
+            var clientDA = new ClienteDA(dbContext);
+            clientBL = new ClienteBL(clientDA);
+        }
 
         // Página principal
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchCategory, string searchName, string searchFeature1, string searchFeature2)
         {
-            return View(db.Productos.ToList());
+            var productos = clientBL.ObtenerTodosLosProductos().AsQueryable();
+
+            // Búsqueda por categoría
+            if (!string.IsNullOrEmpty(searchCategory))
+            {
+                productos = productos.Where(p => p.Categorias.Nombre.Contains(searchCategory));
+            }
+
+            // Búsqueda por nombre
+            if (!string.IsNullOrEmpty(searchName))
+            {
+                productos = productos.Where(p => p.Nombre.Contains(searchName));
+            }
+
+            // Búsqueda por características
+            if (!string.IsNullOrEmpty(searchFeature1))
+            {
+                productos = productos.Where(p => p.Descripcion.Contains(searchFeature1));
+            }
+            if (!string.IsNullOrEmpty(searchFeature2))
+            {
+                productos = productos.Where(p => p.Descripcion.Contains(searchFeature2));
+            }
+
+            // Ordenamiento
+            switch (sortOrder)
+            {
+                case "price_asc":
+                    productos = productos.OrderBy(p => p.Precio);
+                    break;
+                case "price_desc":
+                    productos = productos.OrderByDescending(p => p.Precio);
+                    break;
+                case "newest":
+                    productos = productos.OrderByDescending(p => p.FechaCreacion);
+                    break;
+                case "popular":
+                    productos = productos.OrderByDescending(p => p.Popularidad);
+                    break;
+                default:
+                    productos = productos.OrderBy(p => p.Nombre);
+                    break;
+            }
+
+            return View(productos.ToList());
         }
 
         public ActionResult ProductDetails(int id)
         {
-            var product = db.Productos.Find(id);
+            var product = clientBL.ObtenerProductoPorId(id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -32,72 +83,97 @@ namespace MVC.Controllers
         // Carrito de compras
         public ActionResult ShoppingCart()
         {
-            var cart = Session["Cart"] as List<CarritoCompras> ?? new List<CarritoCompras>();
+            var userId = User.Identity.GetUserId();
+            var cart = clientBL.ObtenerCarritoDeCompras(int.Parse(userId));
             return View(cart);
         }
 
         public ActionResult AddToCart(int id)
         {
-            var product = db.Productos.Find(id);
+            var userId = User.Identity.GetUserId();
+            var product = clientBL.ObtenerProductoPorId(id);
             if (product == null)
             {
                 return HttpNotFound();
             }
 
-            var cart = Session["Cart"] as List<CarritoCompras> ?? new List<CarritoCompras>();
+            clientBL.AñadirProductoAlCarrito(int.Parse(userId), id, 1);
 
-            var cartItem = cart.FirstOrDefault(c => c.Productos.ProductoID == id);
-            if (cartItem == null)
-            {
-                cart.Add(new CarritoCompras { Productos = product, Cantidad = 1 });
-            }
-            else
-            {
-                cartItem.Cantidad++;
-            }
-
-            Session["Cart"] = cart;
             return RedirectToAction("ShoppingCart");
         }
 
         public ActionResult RemoveFromCart(int id)
         {
-            var cart = Session["Cart"] as List<CarritoCompras> ?? new List<CarritoCompras>();
-            var cartItem = cart.FirstOrDefault(c => c.Productos.ProductoID == id);
-            if (cartItem != null)
-            {
-                cart.Remove(cartItem);
-            }
+            var userId = User.Identity.GetUserId();
+            clientBL.EliminarProductoDelCarrito(int.Parse(userId), id);
 
-            Session["Cart"] = cart;
             return RedirectToAction("ShoppingCart");
         }
 
         public ActionResult UpdateCart(int id, int quantity)
         {
-            var cart = Session["Cart"] as List<CarritoCompras> ?? new List<CarritoCompras>();
-            var cartItem = cart.FirstOrDefault(c => c.Productos.ProductoID == id);
-            if (cartItem != null)
-            {
-                cartItem.Cantidad = quantity;
-            }
+            var userId = User.Identity.GetUserId();
+            clientBL.ActualizarCantidadProductoEnCarrito(int.Parse(userId), id, quantity);
 
-            Session["Cart"] = cart;
             return RedirectToAction("ShoppingCart");
         }
 
-        // Órdenes
-        public ActionResult Orders()
+        // Compra
+        [HttpGet]
+        public ActionResult Checkout()
         {
-            var userId = User.Identity.GetUserId();
-            var orders = db.Ordenes.Where(o => Convert.ToString(o.UsuarioID) == userId).ToList();
-            return View(orders);
+            if (User.Identity.IsAuthenticated)
+            {
+                return View();
+            }
+
+            return RedirectToAction("Login", "Account");
         }
 
-        public ActionResult OrderDetails(int id)
+        [HttpPost]
+        public ActionResult Checkout(Direcciones address)
         {
-            var order = db.Ordenes.Find(id);
-            if (order == null || Convert.ToString(order.UsuarioID) != User.Identity.GetUserId())
+            var userId = User.Identity.GetUserId();
+            var cartItems = clientBL.ObtenerCarritoDeCompras(int.Parse(userId)).ToList();
+
+            if (cartItems.Count == 0)
+            {
+                ModelState.AddModelError("", "Tu carrito está vacío.");
+                return View(address);
+            }
+
+            // Crear la orden
+            var order = new Ordenes
+            {
+                UsuarioID = int.Parse(userId),
+                FechaOrden = DateTime.Now,
+                Direcciones = address,
+                DetallesOrdenes = cartItems.Select(item => new DetallesOrdenes
+                {
+                    ProductoID = item.ProductoID,
+                    Cantidad = item.Cantidad,
+                    Precio = item.Productos.Precio
+                }).ToList()
+            };
+
+            clientBL.CrearOrden(order);
+
+            // Vaciar el carrito
+            foreach (var item in cartItems)
+            {
+                if (item.ProductoID.HasValue)
+                {
+                    clientBL.EliminarProductoDelCarrito(int.Parse(userId), item.ProductoID.Value);
+                }
+            }
+
+            return RedirectToAction("OrderConfirmation", new { id = order.OrdenID });
+        }
+
+        public ActionResult OrderConfirmation(int id)
+        {
+            var order = clientBL.ObtenerOrdenPorId(id);
+            if (order == null)
             {
                 return HttpNotFound();
             }
@@ -105,77 +181,14 @@ namespace MVC.Controllers
             return View(order);
         }
 
-        // Gestión de cuentas
-        public ActionResult Account()
+        public ActionResult OrderHistory()
         {
             var userId = User.Identity.GetUserId();
-            var user = db.Usuarios.Find(userId);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(user);
+            var orders = clientBL.ObtenerOrdenesPorUsuario(int.Parse(userId));
+            return View(orders);
         }
 
-        [HttpPost]
-        public ActionResult Account(Usuarios user)
-        {
-            if (ModelState.IsValid)
-            {
-                var existingUser = db.Usuarios.Find(user.UsuarioID);
-                if (existingUser != null)
-                {
-                    existingUser.Nombre = user.Nombre;
-                    existingUser.Email = user.Email;
-                    // Actualizar otros campos según sea necesario
-                    db.SaveChanges();
-                }
-
-                return RedirectToAction("Account");
-            }
-
-            return View(user);
-        }
-
-        // Lista de deseos
-        public ActionResult Wishlist()
-        {
-            var userId = User.Identity.GetUserId();
-            var wishlist = db.CarritoCompras.Where(w => Convert.ToString(w.UsuarioID) == userId).ToList();
-            return View(wishlist);
-        }
-
-        public ActionResult AddToWishlist(int id)
-        {
-            var userId = User.Identity.GetUserId();
-            var product = db.Productos.Find(id);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
-
-            var wishlistItem = new CarritoCompras { ProductoID = id, UsuarioID = (int?)Convert.ToInt64 (userId) };
-            db.CarritoCompras.Add(wishlistItem);
-            db.SaveChanges();
-
-            return RedirectToAction("Wishlist");
-        }
-
-        public ActionResult RemoveFromWishlist(int id)
-        {
-            var userId = User.Identity.GetUserId();
-            var wishlistItem = db.CarritoCompras.FirstOrDefault(w => w.ProductoID == id && w.UsuarioID == (int?)Convert.ToInt64(userId));
-            if (wishlistItem != null)
-            {
-                db.CarritoCompras.Remove(wishlistItem);
-                db.SaveChanges();
-            }
-
-            return RedirectToAction("Wishlist");
-        }
-
-        [HttpGet]
+        // Métodos de búsqueda específicos
         public ActionResult BuscarCategoria()
         {
             return View();
@@ -185,36 +198,21 @@ namespace MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult BuscarCategoria(string categoria)
         {
-            if (string.IsNullOrEmpty(categoria))
-            {
-                return View("Index", db.Productos.ToList());
-            }
-
-            var products = db.Productos.Where(p => p.Categorias.Nombre.Contains(categoria)).ToList();
-            return View("Index", products);
+            var productos = clientBL.BuscarProductos(null, categoria, null, null);
+            return View("Index", productos);
         }
 
-        [HttpGet]
         public ActionResult BuscarNombre()
         {
             return View();
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult BuscarNombre(string nombre)
         {
-            List<Productos> productosList = new List<Productos>();
-            List<Productos> productosList2 = db.Productos.ToList();
-
-            foreach (var productos in productosList2)
-            {
-                if (productos.Nombre == nombre)
-                {
-                    productosList.Add(productos);
-                }
-            }
-            TempData["ProductosList"] = productosList;
-            return View("Index", productosList);
+            var productos = clientBL.BuscarProductos(nombre, null, null, null);
+            return View("Index", productos);
         }
     }
 }

@@ -1,0 +1,24 @@
+﻿@model Models.Productos
+
+<h2>Detalles del Producto</h2>
+
+<div>
+    <h4>@Model.Nombre</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Código</dt>
+        <dd>@Model.Codigo</dd>
+        <dt>Descripción</dt>
+        <dd>@Model.Descripcion</dd>
+        <dt>Cantidad Disponible</dt>
+        <dd>@Model.Cantidad</dd>
+        <dt>Precio</dt>
+        <dd>@Model.Precio.ToString("C")</dd>
+        <dt>Categoría</dt>
+        <dd>@Model.Categorias.Nombre</dd>
+    </dl>
+</div>
+
+<p>
+    @Html.ActionLink("Regresar al Catálogo", "Index", "ClienteProductos")
+</p>

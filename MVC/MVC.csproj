@@ -199,10 +199,26 @@
     <Content Include="Views\AdminCategorias\Create.cshtml" />
     <Content Include="Views\AdminCategorias\Index.cshtml" />
     <Content Include="Views\AdminCategorias\Delete.cshtml" />
+    <Content Include="Views\ClienteProductos\BuscarCaracteristicas.cshtml" />
+    <Content Include="Views\ClienteProductos\ProductDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BL\BL.csproj">
+      <Project>{b6c6230f-d4ff-4e08-b044-9e072653b24b}</Project>
+      <Name>BL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DA\DA.csproj">
+      <Project>{0B99C4C8-86E5-42D1-9F1A-415ECA32CC2B}</Project>
+      <Name>DA</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{dd30a2b1-ec18-4594-a7ea-982df102238c}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
