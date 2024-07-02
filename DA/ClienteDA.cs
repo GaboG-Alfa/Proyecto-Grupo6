@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using Models;
@@ -17,24 +18,18 @@ namespace DA
             db = context;
         }
 
-       
-
         public bool logIn(Usuarios usuario)
         {
             try
             {
-                using (ProyectoEntity context = new ProyectoEntity())
-                {
-                    return context.Usuarios.FirstOrDefault(x => x.Email == usuario.Email &&
-                    x.Contrasena == usuario.Contrasena && x.RolID == 3) != null;
-                }
-
+                return db.Usuarios.FirstOrDefault(x => x.Email == usuario.Email &&
+                        x.Contrasena == usuario.Contrasena && x.RolID == 3) != null;
             }
             catch (Exception error)
             {
                 Console.WriteLine(error.Message);
+                return false;
             }
-            return false;
         }
 
         public IEnumerable<Productos> ObtenerTodosLosProductos()
@@ -142,6 +137,11 @@ namespace DA
                 .Where(o => o.UsuarioID == userId)
                 .OrderByDescending(o => o.FechaOrden)
                 .ToList();
+        }
+
+        public Usuarios ObtenerUsuarioPorEmail(string email)
+        {
+            return db.Usuarios.FirstOrDefault(u => u.Email == email);
         }
     }
 }

@@ -1,0 +1,19 @@
+﻿@model Models.Ordenes
+
+@{
+    ViewBag.Title = "Buscar Orden";
+}
+
+<h2>Buscar Orden</h2>
+
+@using (Html.BeginForm("BuscarOrden", "ClienteProductos", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <label for="numeroOrden">Número de Orden:</label>
+        <input type="text" id="numeroOrden" name="numeroOrden" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Buscar</button>
+}

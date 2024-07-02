@@ -1,0 +1,35 @@
+﻿@model Models.Ordenes
+
+@{
+    ViewBag.Title = "Confirmación de Orden";
+}
+
+<h2>Confirmación de Orden</h2>
+
+<p>Orden ID: @Model.OrdenID</p>
+<p>Fecha de Orden: @Model.FechaOrden</p>
+
+<h3>Detalles de la Orden</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.DetallesOrdenes)
+        {
+            <tr>
+                <td>@item.Productos.Nombre</td>
+                <td>@item.Cantidad</td>
+                <td>@item.Precio</td>
+                <td>@(item.Precio * item.Cantidad)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>Total: @Model.DetallesOrdenes.Sum(item => item.Precio * item.Cantidad)</p>

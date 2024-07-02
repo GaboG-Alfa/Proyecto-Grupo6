@@ -200,7 +200,12 @@
     <Content Include="Views\AdminCategorias\Index.cshtml" />
     <Content Include="Views\AdminCategorias\Delete.cshtml" />
     <Content Include="Views\ClienteProductos\BuscarCaracteristicas.cshtml" />
-    <Content Include="Views\ClienteProductos\ProductDetails.cshtml" />
+    <Content Include="Views\ClienteProductos\DetallesProducto.cshtml" />
+    <Content Include="Views\ClienteProductos\BuscarOrden.cshtml" />
+    <Content Include="Views\ClienteProductos\Carrito.cshtml" />
+    <Content Include="Views\ClienteProductos\Compra.cshtml" />
+    <Content Include="Views\ClienteProductos\ConfirmarOrden.cshtml" />
+    <Content Include="Views\ClienteProductos\HistorialOrdenes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

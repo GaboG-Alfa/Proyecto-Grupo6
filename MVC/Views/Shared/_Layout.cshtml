@@ -35,9 +35,9 @@
                     {
                         <li>
                             @Html.ActionLink("Cerrar Sesión", "LogOut", "Usuarios", new { area = "" }, new
-                       {
-                           @class = "nav-link"
-                       })
+                            {
+                                @class = "nav-link"
+                            })
                         </li>
                     }
                 </ul>
@@ -45,6 +45,12 @@
         </div>
     </nav>
     <div class="container body-content">
+        @if (TempData["Message"] != null)
+        {
+            <div class="alert alert-warning">
+                @TempData["Message"]
+            </div>
+        }
         @RenderBody()
         <hr />
         <footer>

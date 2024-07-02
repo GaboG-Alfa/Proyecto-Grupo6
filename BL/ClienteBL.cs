@@ -17,7 +17,20 @@ namespace BL
             clientDA = clientData;
         }
 
-        public ClienteBL() { }
+        public ClienteBL()
+        {
+            clientDA = new ClienteDA(new ProyectoEntity());
+        }
+
+        public bool logIn(Usuarios client)
+        {
+            bool clientExits = clientDA.logIn(client);
+            if (!clientExits)
+            {
+                throw new Exception("Credenciales incorrectas");
+            }
+            return clientExits;
+        }
 
         public IEnumerable<Productos> ObtenerTodosLosProductos()
         {
@@ -67,6 +80,11 @@ namespace BL
         public IEnumerable<Ordenes> ObtenerOrdenesPorUsuario(int userId)
         {
             return clientDA.ObtenerOrdenesPorUsuario(userId);
+        }
+
+        public Usuarios ObtenerUsuarioPorEmail(string email)
+        {
+            return clientDA.ObtenerUsuarioPorEmail(email);
         }
     }
 }
