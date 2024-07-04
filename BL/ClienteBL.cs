@@ -10,63 +10,73 @@ namespace BL
 {
     public class ClienteBL
     {
-        private ClienteDA clientDA;
+        private ClienteDA clienteDA;
 
         public ClienteBL(ClienteDA clientData)
         {
-            clientDA = clientData;
+            clienteDA = clientData;
         }
 
         public ClienteBL() { }
 
+        public bool logIn(Usuarios client)
+        {
+            bool clientExits = clienteDA.logIn(client);
+            if (!clientExits)
+            {
+                throw new Exception("Incorrect credentials");
+            }
+            return clientExits;
+        }
+
         public IEnumerable<Productos> ObtenerTodosLosProductos()
         {
-            return clientDA.ObtenerTodosLosProductos();
+            return clienteDA.ObtenerTodosLosProductos();
         }
 
         public Productos ObtenerProductoPorId(int id)
         {
-            return clientDA.ObtenerProductoPorId(id);
+            return clienteDA.ObtenerProductoPorId(id);
         }
 
         public IEnumerable<Productos> BuscarProductos(string nombre, string categoria, string feature1, string feature2)
         {
-            return clientDA.BuscarProductos(nombre, categoria, feature1, feature2);
+            return clienteDA.BuscarProductos(nombre, categoria, feature1, feature2);
         }
 
         public void AñadirProductoAlCarrito(int userId, int productoId, int cantidad)
         {
-            clientDA.AñadirProductoAlCarrito(userId, productoId, cantidad);
+            clienteDA.AñadirProductoAlCarrito(userId, productoId, cantidad);
         }
 
         public void EliminarProductoDelCarrito(int userId, int productoId)
         {
-            clientDA.EliminarProductoDelCarrito(userId, productoId);
+            clienteDA.EliminarProductoDelCarrito(userId, productoId);
         }
 
         public void ActualizarCantidadProductoEnCarrito(int userId, int productoId, int cantidad)
         {
-            clientDA.ActualizarCantidadProductoEnCarrito(userId, productoId, cantidad);
+            clienteDA.ActualizarCantidadProductoEnCarrito(userId, productoId, cantidad);
         }
 
         public IEnumerable<CarritoCompras> ObtenerCarritoDeCompras(int userId)
         {
-            return clientDA.ObtenerCarritoDeCompras(userId);
+            return clienteDA.ObtenerCarritoDeCompras(userId);
         }
 
         public void CrearOrden(Ordenes orden)
         {
-            clientDA.CrearOrden(orden);
+            clienteDA.CrearOrden(orden);
         }
 
         public Ordenes ObtenerOrdenPorId(int ordenId)
         {
-            return clientDA.ObtenerOrdenPorId(ordenId);
+            return clienteDA.ObtenerOrdenPorId(ordenId);
         }
 
         public IEnumerable<Ordenes> ObtenerOrdenesPorUsuario(int userId)
         {
-            return clientDA.ObtenerOrdenesPorUsuario(userId);
+            return clienteDA.ObtenerOrdenesPorUsuario(userId);
         }
     }
 }
