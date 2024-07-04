@@ -8,7 +8,7 @@
     }
 </style>
 
-@using (Html.BeginForm("BuscarCaracteristica", "ClienteProductos", FormMethod.Post))
+@using (Html.BeginForm("BuscarCaracteristicas", "ClienteProductos", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -26,7 +26,7 @@
 }
 
 <div>
-    @Html.ActionLink("Regresar al Catálogo", "Index", "ClienteProductos")
+    @Html.ActionLink("Regresar al Catálogo", "Index", "ClienteProductos",new { @class = "btn btn-secondary" })
 </div>
 
 @section Scripts {

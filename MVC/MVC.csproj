@@ -206,6 +206,8 @@
     <Content Include="Views\ClienteProductos\Compra.cshtml" />
     <Content Include="Views\ClienteProductos\ConfirmarOrden.cshtml" />
     <Content Include="Views\ClienteProductos\HistorialOrdenes.cshtml" />
+    <Content Include="Views\AdminCategorias\Details.cshtml" />
+    <Content Include="Views\AdminCategorias\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

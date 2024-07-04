@@ -1,8 +1,5 @@
 ﻿using Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace MVC.Controllers
@@ -23,8 +20,9 @@ namespace MVC.Controllers
             return View();
         }
 
-        // Post: Categorias/Create
+        // POST: Categorias/Create
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(Categorias category)
         {
             if (ModelState.IsValid)
@@ -50,6 +48,7 @@ namespace MVC.Controllers
 
         // POST: Categorias/Edit
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(Categorias category)
         {
             if (ModelState.IsValid)
@@ -85,9 +84,15 @@ namespace MVC.Controllers
 
         // POST: Categorias/Delete
         [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             var category = db.Categorias.Find(id);
+            if (category == null)
+            {
+                return HttpNotFound();
+            }
+
             db.Categorias.Remove(category);
             db.SaveChanges();
             return RedirectToAction("Index");

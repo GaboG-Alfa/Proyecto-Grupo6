@@ -37,13 +37,37 @@
         <dd>
             @Html.DisplayFor(model => model.Precio)
         </dd>
+        <dd>
+            @Html.DisplayNameFor(model => model.CategoriaID)
+        </dd>
+        <dd>
+            @Html.DisplayFor(model => model.CategoriaID)
+        </dd>
+        <dd>
+            @Html.DisplayNameFor(model => model.Popularidad)
+        </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Popularidad)
+        </dd>
+        <dd>
+            @Html.DisplayNameFor(model => model.FechaCreacion)
+        </dd>
+        <dd>
+            @Html.DisplayFor(model => model.FechaCreacion)
+        </dd>
+        <dd>
+            @Html.DisplayNameFor(model => model.ImagenURL)
+        </dd>
+        <dd>
+            @Html.DisplayFor(model => model.ImagenURL)
+        </dd>
     </dl>
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
         <div class="form-actions no-color">
             <input type="submit" value="Eliminar" class="btn btn-danger" /> |
-            @Html.ActionLink("Volver a Administración Productos", "Index")
+            @Html.ActionLink("Volver a Administración de Productos", "Index", null, new { @class = "btn btn-secondary" })
         </div>
     }
 </div>
