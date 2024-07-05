@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Models.CarritoCompras>
+
+@{
+    ViewBag.Title = "Carrito de Compras";
+}
+
+<h2>Carrito de Compras</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Productos.Nombre)</th>
+            <th>@Html.DisplayNameFor(model => model.Cantidad)</th>
+            <th>@Html.DisplayNameFor(model => model.Productos.Precio)</th>
+            <th>Total</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Productos.Nombre)</td>
+                <td>
+                    @using (Html.BeginForm("UpdateCart", "ClienteProductos", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@item.ProductoID" />
+                        <input type="number" name="quantity" value="@item.Cantidad" min="1" max="@item.Productos.Cantidad" />
+                        <button type="submit" class="btn btn-default">Actualizar</button>
+                    }
+                </td>
+                <td>@Html.DisplayFor(modelItem => item.Productos.Precio)</td>
+                <td>@(item.Productos.Precio * item.Cantidad)</td>
+                <td>
+                    @Html.ActionLink("Eliminar", "RemoveFromCart", new { id = item.ProductoID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>Total: @Model.Sum(item => item.Productos.Precio * item.Cantidad)</p>
+
+<p>
+    @Html.ActionLink("Proceder a la Compra", "Compra", "ClienteProductos", new { }, new { @class = "btn btn-primary" })
+</p>

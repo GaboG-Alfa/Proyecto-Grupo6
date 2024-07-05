@@ -1,10 +1,10 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using BL;
+using DA;
 using Models;
 using Microsoft.AspNet.Identity;
 using System;
-using DA;
 
 namespace MVC.Controllers
 {
@@ -69,7 +69,7 @@ namespace MVC.Controllers
             return View(productos.ToList());
         }
 
-        public ActionResult ProductDetails(int id)
+        public ActionResult DetallesProducto(int id)
         {
             var product = clientBL.ObtenerProductoPorId(id);
             if (product == null)
@@ -81,60 +81,96 @@ namespace MVC.Controllers
         }
 
         // Carrito de compras
-        public ActionResult ShoppingCart()
+        public ActionResult Carrito()
         {
-            var userId = User.Identity.GetUserId();
-            var cart = clientBL.ObtenerCarritoDeCompras(int.Parse(userId));
+            var email = User.Identity.Name;
+            if (string.IsNullOrEmpty(email))
+            {
+                TempData["Message"] = "No se ha ingresado";
+                return RedirectToAction("Index", "Usuarios");
+            }
+
+            var user = clientBL.ObtenerUsuarioPorEmail(email);
+            var cart = clientBL.ObtenerCarritoDeCompras(user.UsuarioID);
             return View(cart);
         }
 
         public ActionResult AddToCart(int id)
         {
-            var userId = User.Identity.GetUserId();
+            var email = User.Identity.Name;
+            if (string.IsNullOrEmpty(email))
+            {
+                TempData["Message"] = "No se ha ingresado";
+                return RedirectToAction("Index", "Usuarios");
+            }
+
+            var user = clientBL.ObtenerUsuarioPorEmail(email);
             var product = clientBL.ObtenerProductoPorId(id);
             if (product == null)
             {
                 return HttpNotFound();
             }
 
-            clientBL.AñadirProductoAlCarrito(int.Parse(userId), id, 1);
+            clientBL.AñadirProductoAlCarrito(user.UsuarioID, id, 1);
 
-            return RedirectToAction("ShoppingCart");
+            return RedirectToAction("Carrito");
         }
 
         public ActionResult RemoveFromCart(int id)
         {
-            var userId = User.Identity.GetUserId();
-            clientBL.EliminarProductoDelCarrito(int.Parse(userId), id);
+            var email = User.Identity.Name;
+            if (string.IsNullOrEmpty(email))
+            {
+                TempData["Message"] = "No se ha ingresado";
+                return RedirectToAction("Index", "Usuarios");
+            }
 
-            return RedirectToAction("ShoppingCart");
+            var user = clientBL.ObtenerUsuarioPorEmail(email);
+            clientBL.EliminarProductoDelCarrito(user.UsuarioID, id);
+
+            return RedirectToAction("Carrito");
         }
 
         public ActionResult UpdateCart(int id, int quantity)
         {
-            var userId = User.Identity.GetUserId();
-            clientBL.ActualizarCantidadProductoEnCarrito(int.Parse(userId), id, quantity);
+            var email = User.Identity.Name;
+            if (string.IsNullOrEmpty(email))
+            {
+                TempData["Message"] = "No se ha ingresado";
+                return RedirectToAction("Index", "Usuarios");
+            }
 
-            return RedirectToAction("ShoppingCart");
+            var user = clientBL.ObtenerUsuarioPorEmail(email);
+            clientBL.ActualizarCantidadProductoEnCarrito(user.UsuarioID, id, quantity);
+
+            return RedirectToAction("Carrito");
         }
 
         // Compra
         [HttpGet]
-        public ActionResult Checkout()
+        public ActionResult Compra()
         {
-            if (User.Identity.IsAuthenticated)
+            if (!User.Identity.IsAuthenticated)
             {
-                return View();
+                TempData["Message"] = "No se ha ingresado";
+                return RedirectToAction("Index", "Usuarios");
             }
 
-            return RedirectToAction("Login", "Account");
+            return View();
         }
 
         [HttpPost]
-        public ActionResult Checkout(Direcciones address)
+        public ActionResult Compra(Direcciones address)
         {
-            var userId = User.Identity.GetUserId();
-            var cartItems = clientBL.ObtenerCarritoDeCompras(int.Parse(userId)).ToList();
+            var email = User.Identity.Name;
+            if (string.IsNullOrEmpty(email))
+            {
+                TempData["Message"] = "No se ha ingresado";
+                return RedirectToAction("Index", "Usuarios");
+            }
+
+            var user = clientBL.ObtenerUsuarioPorEmail(email);
+            var cartItems = clientBL.ObtenerCarritoDeCompras(user.UsuarioID).ToList();
 
             if (cartItems.Count == 0)
             {
@@ -145,7 +181,7 @@ namespace MVC.Controllers
             // Crear la orden
             var order = new Ordenes
             {
-                UsuarioID = int.Parse(userId),
+                UsuarioID = user.UsuarioID,
                 FechaOrden = DateTime.Now,
                 Direcciones = address,
                 DetallesOrdenes = cartItems.Select(item => new DetallesOrdenes
@@ -163,15 +199,22 @@ namespace MVC.Controllers
             {
                 if (item.ProductoID.HasValue)
                 {
-                    clientBL.EliminarProductoDelCarrito(int.Parse(userId), item.ProductoID.Value);
+                    clientBL.EliminarProductoDelCarrito(user.UsuarioID, item.ProductoID.Value);
                 }
             }
 
-            return RedirectToAction("OrderConfirmation", new { id = order.OrdenID });
+            return RedirectToAction("ConfirmarOrden", new { id = order.OrdenID });
         }
 
-        public ActionResult OrderConfirmation(int id)
+        public ActionResult ConfirmarOrden(int id)
         {
+            var email = User.Identity.Name;
+            if (string.IsNullOrEmpty(email))
+            {
+                TempData["Message"] = "No se ha ingresado";
+                return RedirectToAction("Index", "Usuarios");
+            }
+
             var order = clientBL.ObtenerOrdenPorId(id);
             if (order == null)
             {
@@ -181,10 +224,17 @@ namespace MVC.Controllers
             return View(order);
         }
 
-        public ActionResult OrderHistory()
+        public ActionResult HistorialOrdenes()
         {
-            var userId = User.Identity.GetUserId();
-            var orders = clientBL.ObtenerOrdenesPorUsuario(int.Parse(userId));
+            var email = User.Identity.Name;
+            if (string.IsNullOrEmpty(email))
+            {
+                TempData["Message"] = "No se ha ingresado";
+                return RedirectToAction("Index", "Usuarios");
+            }
+
+            var user = clientBL.ObtenerUsuarioPorEmail(email);
+            var orders = clientBL.ObtenerOrdenesPorUsuario(user.UsuarioID);
             return View(orders);
         }
 
@@ -213,6 +263,37 @@ namespace MVC.Controllers
         {
             var productos = clientBL.BuscarProductos(nombre, null, null, null);
             return View("Index", productos);
+        }
+
+        public ActionResult BuscarCaracteristica()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult BuscarCaracteristica(string feature1, string feature2)
+        {
+            var productos = clientBL.BuscarProductos(null, null, feature1, feature2);
+            return View("Index", productos);
+        }
+
+        // Busqueda de ordenes
+        public ActionResult BuscarOrden()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult BuscarOrden(int numeroOrden)
+        {
+            var order = clientBL.ObtenerOrdenPorId(numeroOrden);
+            if (order == null)
+            {
+                return HttpNotFound();
+            }
+            return View("ConfirmarOrden", order);
         }
     }
 }

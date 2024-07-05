@@ -3,8 +3,8 @@
     ViewBag.Title = "Administración de Productos";
 }
 
-<h2>Lista de Administración de Productos </h2>
-@Html.ActionLink("Agregar Producto", "Create")
+<h2>Lista de Administración de Productos</h2>
+@Html.ActionLink("Agregar Producto", "Create", "AdminProductos", new { @class = "btn btn-primary" })
 <table class="table">
     <tr>
         <th>
@@ -27,6 +27,18 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.CategoriaID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Popularidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaCreacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImagenURL)
+        </th>
+        <th>
+            Acciones
         </th>
     </tr>
     @foreach (var item in Model)
@@ -53,13 +65,20 @@
             <td>
                 @Html.DisplayFor(modelItem => item.CategoriaID)
             </td>
-        </tr>
-        <tr>
             <td>
-                @Html.ActionLink("Editar", "Edit", new { id = item.ProductoID }) |
-                @Html.ActionLink("Detalles", "Details", new { id = item.ProductoID }) |
-                @Html.ActionLink("Eliminar", "Delete", new { id = item.ProductoID })
+                @Html.DisplayFor(modelItem => item.Popularidad)
             </td>
-        </tr> 
-            }
-    </table>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaCreacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImagenURL)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.ProductoID }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Detalles", "Details", new { id = item.ProductoID }, new { @class = "btn btn-secondary" })
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.ProductoID }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
+</table>

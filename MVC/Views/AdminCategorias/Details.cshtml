@@ -1,13 +1,19 @@
 ﻿@model Models.Categorias
 @{
-    ViewBag.Title = "Eliminar Categoría";
+    ViewBag.Title = "Detalles de la Categoría";
 }
 
-<h2>Eliminar Categoría</h2>
-<h3>¿Está seguro que desea eliminar la categoría?</h3>
+<h2>Detalles de la Categoría</h2>
 <div>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CategoriaID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CategoriaID)
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.Nombre)
         </dt>
@@ -16,7 +22,7 @@
         </dd>
 
         <dt>
-            Productos
+            @Html.DisplayNameFor(model => model.Productos)
         </dt>
         <dd>
             @if (Model.Productos != null && Model.Productos.Count > 0)
@@ -34,13 +40,11 @@
             }
         </dd>
     </dl>
-    @using (Html.BeginForm("Delete", "AdminCategorias", FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
-        @Html.HiddenFor(model => model.CategoriaID)
-        <div class="form-actions no-color">
-            <input type="submit" value="Eliminar" class="btn btn-danger" /> |
-            @Html.ActionLink("Volver a Administración de Categorías", "Index", null, new { @class = "btn btn-secondary" })
-        </div>
-    }
+    <div class="form-actions no-color">
+        @Html.ActionLink("Editar", "Edit", new { id = Model.CategoriaID }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Eliminar", "Delete", new { id = Model.CategoriaID }, new { @class = "btn btn-danger" })
+        @Html.ActionLink("Volver a Administración de Categorías", "Index", null, new { @class = "btn btn-secondary" })
+    </div>
 </div>
+
+

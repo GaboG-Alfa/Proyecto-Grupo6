@@ -4,8 +4,8 @@
     ViewBag.Title = "Productos";
 }
 
-@Html.ActionLink("Buscar Producto por Codigo", "BuscarCodigo", "Productos")
-@Html.ActionLink("Buscar Producto por Nombre", "BuscarNombre", "Productos")
+@Html.ActionLink("Buscar Producto por Codigo", "BuscarCodigo", "Productos", new { @class = "btn btn-primary" })
+@Html.ActionLink("Buscar Producto por Nombre", "BuscarNombre", "Productos", new { @class = "btn btn-primary" })
 
 <h2>Lista de Productos</h2>
 <table class="table">
@@ -31,6 +31,15 @@
         <th>
             @Html.DisplayNameFor(model => model.CategoriaID)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Popularidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaCreacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImagenURL)
+        </th>
     </tr>
     @foreach (var item in Model)
     {
@@ -55,6 +64,15 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CategoriaID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Popularidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaCreacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImagenURL)
             </td>
         </tr>
 

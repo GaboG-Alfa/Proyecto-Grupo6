@@ -7,16 +7,16 @@
 <h2>Catálogo de Productos</h2>
 
 <p>
-    @Html.ActionLink("Buscar por Categoría", "BuscarCategoria", "ClienteProductos") |
-    @Html.ActionLink("Buscar Producto por Nombre", "BuscarNombre", "ClienteProductos") |
-    @Html.ActionLink("Buscar por Características", "BuscarCaracteristicas", "ClienteProductos")
+    @Html.ActionLink("Buscar por Categoría", "BuscarCategoria", "ClienteProductos", new { @class = "btn btn-primary" }) |
+    @Html.ActionLink("Buscar Producto por Nombre", "BuscarNombre", "ClienteProductos", new { @class = "btn btn-primary" }) |
+    @Html.ActionLink("Buscar por Características", "BuscarCaracteristica", "ClienteProductos", new { @class = "btn btn-primary" }) |
 </p>
 
 <div>
-    @Html.ActionLink("Precio de Menor a Mayor", "Index", new { sortOrder = "price_asc" }) |
-    @Html.ActionLink("Precio de Mayor a Menor", "Index", new { sortOrder = "price_desc" }) |
-    @Html.ActionLink("Más Reciente", "Index", new { sortOrder = "newest" }) |
-    @Html.ActionLink("Más Popular", "Index", new { sortOrder = "popular" })
+    @Html.ActionLink("Precio de Menor a Mayor", "Index", new { sortOrder = "price_asc" }, new { @class = "btn btn-primary" }) |
+    @Html.ActionLink("Precio de Mayor a Menor", "Index", new { sortOrder = "price_desc" }, new { @class = "btn btn-primary" }) |
+    @Html.ActionLink("Más Reciente", "Index", new { sortOrder = "newest" }, new { @class = "btn btn-primary" }) |
+    @Html.ActionLink("Más Popular", "Index", new { sortOrder = "popular" }, new { @class = "btn btn-primary" }) |
 </div>
 
 <table class="table">
@@ -43,7 +43,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.CategoriaID)
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Popularidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaCreacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImagenURL)
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -72,8 +80,17 @@
                     @Html.DisplayFor(modelItem => item.CategoriaID)
                 </td>
                 <td>
-                    @Html.ActionLink("Detalles", "ProductDetails", new { id = item.ProductoID }) |
-                    @Html.ActionLink("Agregar al Carrito", "AddToCart", new { id = item.ProductoID })
+                    @Html.DisplayFor(modelItem => item.Popularidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaCreacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ImagenURL)
+                </td>
+                <td>
+                    @Html.ActionLink("Detalles", "DetallesProducto", new { id = item.ProductoID }, new {@class = "btn btn-secondary"}) |
+                    @Html.ActionLink("Agregar al Carrito", "AddToCart", new { id = item.ProductoID }, new {@class = "btn btn-primary"})
                 </td>
             </tr>
         }

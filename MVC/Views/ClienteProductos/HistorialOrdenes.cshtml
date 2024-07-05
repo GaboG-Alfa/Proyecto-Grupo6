@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Models.Ordenes>
+
+@{
+    ViewBag.Title = "Historial de Órdenes";
+}
+
+<h2>Historial de Órdenes</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Orden ID</th>
+            <th>Fecha de Orden</th>
+            <th>Total</th>
+            <th>Estado</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.OrdenID</td>
+                <td>@item.FechaOrden</td>
+                <td>@item.DetallesOrdenes.Sum(d => d.Precio * d.Cantidad)</td>
+                <td>@item.Estado</td>
+                <td>@Html.ActionLink("Ver Detalles", "ConfirmarOrden", new { id = item.OrdenID })</td>
+            </tr>
+        }
+    </tbody>
+</table>

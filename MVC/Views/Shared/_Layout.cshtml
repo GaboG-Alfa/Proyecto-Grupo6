@@ -18,7 +18,7 @@
             </button>
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Productos", "Index", "ClienteProductos", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Productos", "Index", "Productos", new { area = "" }, new { @class = "nav-link" })</li>
                     @if (!User.Identity.IsAuthenticated)
                     {
                         <li>@Html.ActionLink("Iniciar sesión", "Index", "Usuarios", new { area = "" }, new { @class = "nav-link" })</li>
@@ -35,9 +35,9 @@
                     {
                         <li>
                             @Html.ActionLink("Cerrar Sesión", "LogOut", "Usuarios", new { area = "" }, new
-                       {
-                           @class = "nav-link"
-                       })
+                            {
+                                @class = "nav-link"
+                            })
                         </li>
                     }
                 </ul>
@@ -45,6 +45,12 @@
         </div>
     </nav>
     <div class="container body-content">
+        @if (TempData["Message"] != null)
+        {
+            <div class="alert alert-warning">
+                @TempData["Message"]
+            </div>
+        }
         @RenderBody()
         <hr />
         <footer>

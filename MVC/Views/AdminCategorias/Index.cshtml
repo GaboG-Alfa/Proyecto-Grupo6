@@ -4,7 +4,7 @@
 }
 
 <h2>Lista de Administración de Categorías</h2>
-@Html.ActionLink("Agregar Categoría", "Create", "AdminCategorias")
+@Html.ActionLink("Agregar Categoría", "Create", "AdminCategorias",new { @class = "btn btn-primary" })
 <table class="table">
     <tr>
         <th>
@@ -35,9 +35,9 @@
                 }
             </td>
             <td>
-                @Html.ActionLink("Editar", "EditCategory", new { id = item.CategoriaID }) |
-                @Html.ActionLink("Detalles", "DetailsCategory", new { id = item.CategoriaID }) |
-                @Html.ActionLink("Eliminar", "DeleteCategory", new { id = item.CategoriaID })
+                @Html.ActionLink("Editar", "Edit", new { id = item.CategoriaID }, new { @class = "btn btn-primary" }) 
+                @Html.ActionLink("Detalles", "Details", new { id = item.CategoriaID },new { @class = "btn btn-secondary" }) 
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.CategoriaID }, new { @class = "btn btn-danger" })
             </td>
         </tr>
     }
